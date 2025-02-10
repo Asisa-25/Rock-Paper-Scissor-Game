@@ -1,0 +1,89 @@
+import java.util.Random;
+import java.util.Scanner;
+
+class Game {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random= new Random();
+
+        while (true) {
+            System.out.println("Rock-Paper-Pencil-Scissors Game");
+            System.out.println("1. Rock");
+            System.out.println("2. Paper");
+            System.out.println("3. Scissors");
+            System.out.println("4. Pencil");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
+            int userOption = scanner.nextInt();
+            if (userOption == 5) {
+                System.exit(0);
+            }
+
+            int computerOption = random.nextInt(5) + 1;
+            String userChoice = getChoice(userOption);
+            String computerChoice = getChoice(computerOption);
+            System.out.println("You chose: " + userChoice);
+            System.out.println("Computer chose: " + computerChoice);
+            String result = determineWinner(userOption, computerOption);
+            System.out.println(result);
+        }
+    }
+
+    private static String getChoice(int option) {
+        switch (option) {
+            case 1: return "Rock";
+            case 2: return "Paper";
+            case 3: return "Scissors";
+            case 4: return "Pencil";
+            default: return "Invalid choice";
+        }
+    }
+
+    private static String determineWinner(int userOption, int computerOption) {
+        if (userOption == computerOption) {
+            return "It's a tie!";
+        }
+        
+        switch (userOption) {
+            case 1://only rock is used
+                if (computerOption == 2) {
+                    return "Paper covers Rock. Computer wins!";
+                } else if (computerOption == 3) {
+                    return "Rock crushes Scissors. You win!";
+                } else if (computerOption == 4) {
+                    return "Pencil makes a hole in Rock. Computer wins!";
+                }
+                break;
+            case 2://only paper is used
+                if (computerOption == 1) {
+                    return "Paper covers Rock. You win!";
+                } else if (computerOption == 3) {
+                    return "Scissors cut Paper. Computer wins!";
+                } else if (computerOption == 4) {
+                    return "Paper covers Pencil. You win!";
+                }
+                break;
+            case 3://only pencil is used
+                if (computerOption == 1) {
+                    return "Rock crushes Scissors. Computer wins!";
+                } else if (computerOption == 2) {
+                    return "Scissors cut Paper. You win!";
+                } else if (computerOption == 4) {
+                    return "Scissors cut Pencil. You win!";
+                }
+                break;
+            case 4: //only scissors is used
+                if (computerOption == 1) {
+                    return "Pencil makes a hole in Rock. You win!";
+                } else if (computerOption == 2) {
+                    return "Paper covers Pencil. Computer wins!";
+                } else if (computerOption == 3) {
+                    return "Scissors cut Pencil. Computer wins!";
+                }
+                break;
+            default:
+                return "Invalid option";
+        }
+        return "Unexpected error.";
+    }
+}
